@@ -1,0 +1,31 @@
+[package]
+name = "attest-host"
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+authors = ["Abhishek Khaparde <khapardehuf@gmail.com>"]
+
+[dependencies]
+attest-core = { path = "../core", features = ["std", "serde"] }
+attest-program = { path = "../program" }
+borsh = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+hex = { workspace = true }
+risc0-zkvm = { workspace = true, features = ["std"] }
+risc0-binfmt = "=3.0.5"
+risc0-zkos-v1compat = "=2.2.2"
+lee_core = { workspace = true }
+lee = { git = "https://github.com/logos-blockchain/logos-execution-zone.git", rev = "db66590ab821a4e142c211017a3866d007f6fa77" }
+alloy-trie = { version = "=0.9.8", features = ["ethereum"] }
+alloy-rlp = "=0.3.16"
+alloy-primitives = "=1.7.3"
+nybbles = "=0.4.8"
+
+[[bin]]
+name = "gen_receipt_proof"
+path = "src/bin/gen_receipt_proof.rs"
+
+[[bin]]
+name = "measure"
+path = "src/bin/measure.rs"

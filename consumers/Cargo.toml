@@ -1,0 +1,13 @@
+[package]
+name = "attest-consumers"
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+authors = ["Abhishek Khaparde <khapardehuf@gmail.com>"]
+
+[dependencies]
+attest-core = { path = "../core", features = ["std"] }
+borsh = { workspace = true }
+
+[dev-dependencies]
+attest-host = { path = "../host" }

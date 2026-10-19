@@ -1,0 +1,19 @@
+[package]
+name = "attest-program"
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+authors = ["Abhishek Khaparde <khapardehuf@gmail.com>"]
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "attest_prog"
+path = "src/bin/attest_prog.rs"
+
+[dependencies]
+attest-core = { path = "../core", default-features = false }
+lee_core = { git = "https://github.com/logos-blockchain/logos-execution-zone.git", rev = "db66590ab821a4e142c211017a3866d007f6fa77" }
+risc0-zkvm = { version = "=3.0.5", default-features = false, features = ["getrandom"] }
+borsh = { version = "1.5", features = ["derive"] }

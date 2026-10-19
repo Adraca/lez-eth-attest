@@ -1,0 +1,11 @@
+[program]
+name = "ethereum_attest"
+version = "0.1.0"
+target_testnet = "v0.3.1"
+note = "Targeting published LEZ v0.3.1 (rev db66590); testnet 0.4 is unreleased per https://github.com/logos-blockchain/logos-execution-zone/releases. Full 0.4 migration will update dependency pins and sequencer target."
+idl = "artifacts/ethereum_attest.idl.json"
+binary = "artifacts/ethereum_attest.bin"
+
+[toolchain]
+risc0 = "3.0.5"
+rust = "1.99.0"

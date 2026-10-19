@@ -1,0 +1,105 @@
+{
+  "version": "0.1.0",
+  "name": "ethereum_attest",
+  "instructions": [
+    {
+      "name": "init_instance",
+      "accounts": [
+        { "name": "instance", "is_mut": true, "is_signer": false, "pda": { "seeds": ["instance_id"] } }
+      ],
+      "args": [
+        { "name": "instance_id", "type": "hash256" },
+        { "name": "chain_id", "type": "u64" }
+      ],
+      "discriminator": [1, 0, 0, 0, 0, 0, 0, 0],
+      "variant": "InitInstance"
+    },
+    {
+      "name": "bootstrap_from_checkpoint",
+      "accounts": [
+        { "name": "instance", "is_mut": true, "is_signer": false, "pda": { "seeds": ["instance_id"] } }
+      ],
+      "args": [
+        { "name": "instance_id", "type": "hash256" },
+        { "name": "chain_id", "type": "u64" },
+        { "name": "ws_checkpoint_root", "type": "hash256" },
+        { "name": "sync_committee_root", "type": "hash256" }
+      ],
+      "discriminator": [4, 0, 0, 0, 0, 0, 0, 0],
+      "variant": "BootstrapFromCheckpoint"
+    },
+    {
+      "name": "record_header",
+      "accounts": [
+        { "name": "header", "is_mut": true, "is_signer": false, "pda": { "seeds": ["header", "instance_id", "slot"] } }
+      ],
+      "args": [
+        { "name": "instance_id", "type": "hash256" },
+        { "name": "header", "type": "HeaderRecord" }
+      ],
+      "discriminator": [2, 0, 0, 0, 0, 0, 0, 0],
+      "variant": "RecordHeader"
+    },
+    {
+      "name": "attest",
+      "accounts": [
+        { "name": "header", "is_mut": false, "is_signer": false, "pda": { "seeds": ["header", "instance_id", "slot"] } }
+      ],
+      "args": [
+        { "name": "instance_id", "type": "hash256" },
+        { "name": "slot", "type": "u64" },
+        { "name": "query", "type": "Query" }
+      ],
+      "discriminator": [3, 0, 0, 0, 0, 0, 0, 0],
+      "variant": "Attest"
+    },
+    {
+      "name": "step_committee_handoff",
+      "accounts": [
+        { "name": "instance", "is_mut": true, "is_signer": false, "pda": { "seeds": ["instance_id"] } }
+      ],
+      "args": [
+        { "name": "instance_id", "type": "hash256" },
+        { "name": "period", "type": "u64" },
+        { "name": "next_sync_committee_root", "type": "hash256" }
+      ],
+      "discriminator": [5, 0, 0, 0, 0, 0, 0, 0],
+      "variant": "StepCommitteeHandoff"
+    }
+  ],
+  "accounts": [
+    {
+      "name": "InstanceConfig",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "chain_id", "type": "u64" },
+          { "name": "ws_checkpoint_root", "type": "hash256" },
+          { "name": "sync_committee_root", "type": "hash256" }
+        ]
+      }
+    },
+    {
+      "name": "HeaderRecord",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "chain_id", "type": "u64" },
+          { "name": "slot", "type": "u64" },
+          { "name": "beacon_root", "type": "hash256" },
+          { "name": "block_number", "type": "u64" },
+          { "name": "block_hash", "type": "hash256" },
+          { "name": "state_root", "type": "hash256" },
+          { "name": "receipts_root", "type": "hash256" }
+        ]
+      }
+    }
+  ],
+  "types": [],
+  "errors": [],
+  "metadata": {
+    "name": "ethereum_attest",
+    "version": "0.1.0"
+  },
+  "instruction_type": "attest_program::Instruction"
+}
